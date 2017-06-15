@@ -15,26 +15,23 @@ public class Province extends DataSupport{
         return id;
     }
 
-    public Province setId(int id) {
+    public void setId(int id) {
         this.id = id;
-        return this;
     }
 
     public String getProvinceName() {
         return provinceName;
     }
 
-    public Province setProvinceName(String provinceName) {
+    public void setProvinceName(String provinceName) {
         this.provinceName = provinceName;
-        return this;
     }
 
     public int getProvinceCode() {
         return provinceCode;
     }
 
-    public Province setProvinceCode(int provinceCode) {
+    public void setProvinceCode(int provinceCode) {
         this.provinceCode = provinceCode;
-        return this;
     }
 }
