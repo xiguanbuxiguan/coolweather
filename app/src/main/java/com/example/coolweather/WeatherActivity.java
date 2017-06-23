@@ -1,5 +1,6 @@
 package com.example.coolweather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.coolweather.gson.Forecast;
 import com.example.coolweather.gson.Weather;
+import com.example.coolweather.service.AutoUpdateService;
 import com.example.coolweather.util.HttpUtil;
 import com.example.coolweather.util.Utility;
 
@@ -110,7 +112,6 @@ public class WeatherActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable(){
                         public void run(){
                             if(weather !=null && "ok".equals(weather.status)){
-                                Log.d("test3", "run: ");
                                 SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
                                 editor.putString("weather",responseText);
                                 editor.apply();
@@ -160,7 +161,6 @@ public class WeatherActivity extends AppCompatActivity {
         });
     }
     public void showWeatherInfo(Weather weather){
-        Log.d("test4", weather.toString());
         String cityName = weather.basic.cityName;
         String updateTime = weather.basic.update.updateTime;
         String degree = weather.now.temperature+"℃";
@@ -193,5 +193,7 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWashString);
         sportText.setText(sportString);
         weatherLayout.setVisibility(View.VISIBLE);
+        Intent intent = new Intent(this,AutoUpdateService.class);
+        startService(intent);
     }
 }
